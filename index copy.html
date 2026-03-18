@@ -1,0 +1,146 @@
+<section class="slider">
+
+    <div class="slides">
+
+        <div class="slide active">
+
+            <h1>Transforme a Gestão da Sua Empresa</h1>
+
+            <p>
+                A ECCOKAIZEN ajuda empresas a crescer com organização contabilística, planeamento financeiro e soluções estratégicas.
+            </p>
+
+            <a href="#contacto">Solicitar Consultoria</a>
+
+        </div>
+
+
+        <div class="slide">
+
+            <h1>Reduza Riscos Fiscais e Evite Multas</h1>
+
+            <p>
+                Garantimos o cumprimento das obrigações fiscais da sua empresa com acompanhamento profissional e soluções eficientes.
+            </p>
+
+            <a href="#servicos">Conhecer Serviços</a>
+
+        </div>
+
+
+        <div class="slide">
+
+            <h1>Planeamento Financeiro Inteligente</h1>
+
+            <p>
+                Tomar decisões certas é essencial para o crescimento. Ajudamos a melhorar a saúde financeira do seu negócio.
+            </p>
+
+            <a href="#contacto">Falar com Consultor</a>
+
+        </div>
+
+
+        <div class="slide">
+
+            <h1>Comece ou Expanda o Seu Negócio</h1>
+
+            <p>
+                Apoiamos empreendedores na criação, legalização e expansão de empresas com consultoria especializada.
+            </p>
+
+            <a href="#contacto">Começar Agora</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<style>
+    .slider {
+        height: 520px;
+        background: #0a3d62;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .slide {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: 1s;
+        padding: 20px;
+    }
+    
+    .slide.active {
+        opacity: 1;
+    }
+    
+    .slide h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+    }
+    
+    .slide p {
+        font-size: 18px;
+        max-width: 700px;
+        margin: auto;
+        margin-bottom: 25px;
+    }
+    
+    .slide a {
+        background: white;
+        color: #0a3d62;
+        padding: 12px 25px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+    
+    @media(max-width:600px) {
+        .slide h1 {
+            font-size: 28px;
+        }
+        .slide p {
+            font-size: 16px;
+        }
+    }
+</style>
+
+
+<script>
+    let slides = document.querySelectorAll(".slide")
+    let index = 0
+
+    function showSlide() {
+
+        slides.forEach(s => s.classList.remove("active"))
+
+        index++
+
+        if (index > slides.length - 1) {
+            index = 0
+        }
+
+        slides[index].classList.add("active")
+
+    }
+
+    setInterval(showSlide, 5000)
+</script>
