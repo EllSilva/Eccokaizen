@@ -4,153 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processo de Trabalho</title>
+    <title>Layout Profissional</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            background-color: #f5f5f5;
-            color: #1d2b4f;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
+        /* CONTAINER PRINCIPAL */
         
         .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 60px 20px;
-        }
-        
-        .subtitle {
-            color: #b37b5c;
-            font-style: italic;
-            font-size: 18px;
-        }
-        
-        .title {
-            font-size: 32px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        
-        .description {
-            color: #555;
-            margin-bottom: 40px;
-        }
-        
-        .content {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-        /* Lista */
-        
-        .steps {
-            flex: 1;
-        }
-        
-        .step {
-            display: flex;
-            margin-bottom: 30px;
-        }
-        
-        .number {
-            min-width: 60px;
-            height: 60px;
-            background-color: #b37b5c;
-            color: white;
-            border-radius: 50%;
+            width: 90%;
+            max-width: 1100px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            font-weight: bold;
-            margin-right: 20px;
         }
-        
-        .step h3 {
-            margin: 0;
-            font-size: 20px;
-        }
-        
-        .step p {
-            margin: 5px 0 0;
-            color: #444;
-            font-size: 14px;
-        }
-        /* Imagem */
+        /* IMAGEM (MAIOR) */
         
         .image {
-            flex: 1;
+            width: 60%;
+            height: 420px;
+            /* maior que o texto */
+            overflow: hidden;
         }
         
         .image img {
             width: 100%;
-            border-radius: 8px;
+            height: 100%;
+            object-fit: cover;
         }
-        /* Responsivo */
+        /* BLOCO AZUL (MENOR) */
         
-        @media (max-width: 768px) {
-            .content {
+        .content_escolhe {
+            width: 40%;
+            background: #0d3b8e;
+            color: #fff;
+            padding: 50px 40px;
+            height: 320px;
+            /* menor que a imagem */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: -60px;
+            /* sobreposição tipo da imagem */
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content_escolhe h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+        
+        .content_escolhe p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        /* BOTÃO */
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            color: #0d3b8e;
+            padding: 12px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            background: #e6e6e6;
+        }
+        /* RESPONSIVO */
+        
+        @media(max-width:768px) {
+            .container {
                 flex-direction: column;
+            }
+            .image {
+                width: 100%;
+                height: 300px;
+            }
+            .content_escolhe {
+                width: 100%;
+                margin-left: 0;
+                margin-top: -40px;
+                /* mantém efeito sobreposto */
+                height: auto;
             }
         }
     </style>
-
 </head>
 
 <body>
 
     <div class="container">
 
-        <div class="subtitle">Processo de trabalho</div>
-        <div class="title">Como é que nós trabalhamos</div>
-        <div class="description">
-            Aqui está um pouco do que pode encontrar no nosso escritório:
+        <div class="image">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="Equipe">
         </div>
 
-        <div class="content">
+        <div class="content_escolhe">
+            <h2>Interessado em uma carreira na KPMG?</h2>
+            <p>
+                Queremos apoiá-lo em sua jornada para criar uma carreira impactante. Junte-se a nós e você também pode fazer trabalhos que realmente importam.
+            </p>
 
-            <div class="steps">
-
-                <div class="step">
-                    <div class="number">1</div>
-                    <div>
-                        <h3>Tomar um café</h3>
-                        <p>Na ACT-Consultoria acreditamos que uma boa conversa começa sempre depois de um bom café.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="number">2</div>
-                    <div>
-                        <h3>Reunião de kick-off</h3>
-                        <p>É o seu momento. Estamos disponíveis para ouvi-lo e entender as necessidades da sua empresa.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="number">3</div>
-                    <div>
-                        <h3>Definir objectivos</h3>
-                        <p>Este é o momento no qual definimos o que será feito, em quanto tempo e quanto esforço será investido.</p>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="number">4</div>
-                    <div>
-                        <h3>Desenvolver um plano de ação</h3>
-                        <p>O plano que servirá como bússola na implementação dos esforços para a materialização dos objectivos.</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="image">
-                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df" alt="Trabalho">
-            </div>
-
+            <a href="#" class="btn">
+            Encontre sua próxima oportunidade →
+        </a>
         </div>
 
     </div>
