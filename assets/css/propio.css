@@ -68,7 +68,7 @@
 
 /* BOTÃO */
 
-.btn {
+.btn2 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -82,7 +82,7 @@
     transition: 0.3s;
 }
 
-.btn:hover {
+.btn2:hover {
     background: #e6e6e6;
 }
 
