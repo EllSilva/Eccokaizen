@@ -1,0 +1,155 @@
+<div>
+  <p-menu></p-menu>
+
+  <!-- Content Start  lista_medias -->
+  <div class="content">
+    <!-- Navbar Start for -->
+    <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+      <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+      </a>
+      <a @click="toggleMenu" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+      </a>
+      <form class="d-none d-md-flex ms-4">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search" />
+      </form>
+      <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fa fa-bell me-lg-2"></i>
+            <span class="d-none d-lg-inline-flex">Notificação</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Perfil atualizado</h6>
+              <small>15 minutos atrás</small>
+            </a>
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Novo usuário adicionado</h6>
+              <small>00</small>
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item text-center">Ver todas as notificações</a>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px" />
+            <span class="d-none d-lg-inline-flex">FDULAN</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+            <a href="#" class="dropdown-item">Meu Perfil</a>
+            <a href="#" class="dropdown-item">Configurações</a>
+            <a @click="logout" class="dropdown-item">Sair</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Form Start -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+          <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Testeunhos</h6>
+
+            <div class="alert alert-light alert-dismissible fade show" role="alert">
+              <i class="fa fa-exclamation-circle me-2"></i>
+              <span>Autor</span>
+              <p> {{autor}} </p>
+                  <i class="fa fa-exclamation-circle me-2"></i>
+              <span>Assunto</span>
+              <p> {{titulo}} </p>
+                     <i class="fa fa-exclamation-circle me-2"></i>
+              <span>Comentarios</span> 
+              <p> {{descricao}} </p>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-sm-6 col-xl-6">
+                    <label for="formFileLg" class="form-label">Imagem</label>
+                    <figure class="image-container">
+                      <img class="image-img" :src="imagemVer" accept="image/*" />
+                    </figure>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <form enctype="multipart/form-data" action="javascript:void(0)" class="php-email-form"
+              @submit.prevent="sendNoticias">
+
+
+              <div class="form-floating mb-3">
+                <select v-model="selectedCategoria" class="form-select" id="floatingSelect"
+                  aria-label="Floating label select example">
+                  <option disabled value="">Categoria</option>
+                  <option v-for="categoria in categorias" :key="categoria.id" :value="categoria.name">
+                    {{ categoria.name }}
+                  </option>
+                </select>
+                <label for="floatingSelect">Estado</label>
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Alterar o Estado</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-xl-6">
+          <div class="h-100 bg-secondary rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h6 class="mb-0">Comentarios</h6>
+              <a href="">Ver tudo</a>
+            </div>
+
+
+            <div class="bg-secondary rounded h-100 p-4">
+              <div class="alert alert-primary alert-dismissible fade show" role="alert"  v-for="item in lista_medias" :key="item.id">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing primary alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+ 
+            
+
+              <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing secondary alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing success alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing danger alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing warning alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>An icon & dismissing info alert—check it out!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+            </div>
+
+ 
+
+            <div class="border-bottom py-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Form End -->
+  </div>
+  <p-footer></p-footer>
+</div>

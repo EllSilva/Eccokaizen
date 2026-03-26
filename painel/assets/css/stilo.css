@@ -1,0 +1,84 @@
+.image-container {  
+  width: 50%; 
+}
+.image-img {  
+  width: 30%;
+  height: 30%;
+}
+
+.img_blog {  
+  top: 0;
+  left: 0;
+  width: 2vw;
+  height: 4vh;
+}
+
+w-100 h-100
+ 
+.page-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333;
+  z-index: 9999; 
+}
+
+.cube {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+.cube:nth-child(1) {
+  background-color: #8CC271;
+}
+.cube:nth-child(2) {
+  background-color: #69BEEB;
+}
+.cube:nth-child(3) {
+  background-color: #F5AA39;
+}
+.cube:nth-child(4) {
+  background-color: #E9643B;
+}
+.cube:first-child {
+  animation: left 1s infinite;
+}
+.cube:last-child {
+  animation: right 1s infinite 0.5s;
+}
+
+@keyframes left {
+  40% {
+    transform: translateX(-60px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
+@keyframes right {
+  40% {
+    transform: translateX(60px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}/*# sourceMappingURL=stilo.css.map */
+
+.limite-linhas2{
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* número de linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.limite-linhas4{
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* número de linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,118 +1,86 @@
 import get_template from "../../components/get_template.js";
 
 export default {
-  data: function () {
-    return {
-      title: "home",
+    data: function() {
+        return {
+            title: "home",
+        };
+    },
+
+    methods: {
+
+
+
+    },
+
+    async mounted() {
+
+        let index = 0;
+const slider = document.getElementById("slider");
+const total = slider.children.length;
+
+function getVisibleCard2s(){
+  if(window.innerWidth <= 600) return 1;
+  if(window.innerWidth <= 900) return 2;
+  return 3;
+}
+
+function updateSlider(){
+  const visible = getVisibleCard2s();
+  const offset = index * (100 / visible);
+  slider.style.transform = `translateX(-${offset}%)`;
+  updateDots();
+}
+
+function moveSlide(step){
+  const visible = getVisibleCard2s();
+  index += step;
+
+  if(index < 0) index = total - visible;
+  if(index > total - visible) index = 0;
+
+  updateSlider();
+}
+
+/* PAGINAÇÃO */
+function createDots(){
+  const pagination2 = document.getElementById("pagination2");
+  pagination2.innerHTML = "";
+  const visible = getVisibleCard2s();
+  const dotsCount = total - visible + 1;
+
+  for(let i=0; i<dotsCount; i++){
+    let dot = document.createElement("span");
+    dot.classList.add("dot");
+    dot.onclick = () => {
+      index = i;
+      updateSlider();
     };
-  },
+    pagination2.appendChild(dot);
+  }
+}
 
-  methods: {},
+function updateDots(){
+  const dots = document.querySelectorAll(".dot");
+  dots.forEach(d => d.classList.remove("active"));
+  if(dots[index]) dots[index].classList.add("active");
+}
 
-  async mounted() {
-    const slide_pris = document.querySelectorAll(".slide_pri");
-    let currentSlide_pri = 0;
-    const typewriterText = [
-      "Soluções",
-      "Inovação",
-      "Tecnologia",
-      "Engenharia",
-      "Industrial",
-    ];
+/* AUTO PLAY */
+setInterval(() => {
+  moveSlide(1);
+}, 4000);
 
-    const typewriterElement = document.getElementById("typewriter");
+/* INIT */
+window.addEventListener("resize", () => {
+  index = 0;
+  createDots();
+  updateSlider();
+});
 
-    function typeWriterEffect(text, i = 0) {
-      if (i < text.length) {
-        typewriterElement.textContent = text.substring(0, i + 1);
-        setTimeout(() => typeWriterEffect(text, i + 1), 80);
-      }
-    }
+createDots();
+updateSlider();
 
-    function showSlide_pri(index) {
-      slide_pris.forEach((slide_pri) => slide_pri.classList.remove("active"));
-      slide_pris[index].classList.add("active");
-      typewriterElement.textContent = "";
-      typeWriterEffect(typewriterText[index]);
-    }
-
-    setInterval(() => {
-      currentSlide_pri = (currentSlide_pri + 1) % slide_pris.length;
-      showSlide_pri(currentSlide_pri);
-    }, 6000);
-
-    showSlide_pri(currentSlide_pri);
-
-    //========================================
-
-    let index = 0;
-    const slides = document.querySelector(".slidestime");
-    const total = document.querySelectorAll(".slidestime img").length;
-
-    function updateSlide() {
-      const isMobile = window.innerWidth <= 600;
-      const visible = isMobile ? 1 : 2;
-      const move = isMobile ? 100 : 50;
-      slides.style.transform = `translateX(-${index * move}%)`;
-      return visible;
-    }
-
-    document.querySelector(".nexttime").onclick = () => {
-      const visible = updateSlide();
-      if (index < total - visible) {
-        index++;
-        updateSlide();
-      }
-    };
-
-    document.querySelector(".prevtime").onclick = () => {
-      if (index > 0) {
-        index--;
-        updateSlide();
-      }
-    };
-
-    window.addEventListener("resize", updateSlide);
-    updateSlide();
-
-    //========================================
-
-    AOS.init({
-      duration: 400,
-    });
-
-    //========================================
-
-    var swiper = new Swiper(".mySwiperservico", {
-      spaceBetween: 30,
-
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        // quando a largura for >= 320px
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        // quando a largura for >= 480px
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        // quando a largura for >= 768px
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        // quando a largura for >= 1024px
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 40,
-        },
-      },
-    });
-  },
-  template: await get_template("./assets/js/view/home/home"),
+    },
+    template: await get_template("./assets/js/view/home/home"),
 };

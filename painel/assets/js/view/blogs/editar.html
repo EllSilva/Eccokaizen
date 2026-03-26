@@ -1,0 +1,247 @@
+<div>
+  <p-menu></p-menu>
+
+  <!-- Content Start  lista_medias -->
+  <div class="content">
+    <!-- Navbar Start for -->
+    <nav
+      class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0"
+    >
+      <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+      </a>
+      <a @click="toggleMenu" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+      </a>
+      <form class="d-none d-md-flex ms-4">
+        <input
+          class="form-control bg-dark border-0"
+          type="search"
+          placeholder="Search"
+        />
+      </form>
+      <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+          >
+            <i class="fa fa-bell me-lg-2"></i>
+            <span class="d-none d-lg-inline-flex">Notificação</span>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
+          >
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Perfil atualizado</h6>
+              <small>15 minutos atrás</small>
+            </a>
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Novo usuário adicionado</h6>
+              <small>00</small>
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item text-center"
+              >Ver todas as notificações</a
+            >
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              class="rounded-circle me-lg-2"
+              src="img/user.jpg"
+              alt=""
+              style="width: 40px; height: 40px"
+            />
+            <span class="d-none d-lg-inline-flex">FDULAN</span>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
+          >
+            <a href="#" class="dropdown-item">Meu Perfil</a>
+            <a href="#" class="dropdown-item">Configurações</a>
+            <a @click="logout" class="dropdown-item">Sair</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Form Start -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+          <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Adicionar Noticia</h6>
+            <form
+              enctype="multipart/form-data"
+              action="javascript:void(0)"
+              class="php-email-form"
+              @submit.prevent="sendNoticias"
+            >
+              <div class="form-floating mb-3">
+                <input
+                  v-model="titulo"
+                  type="text"
+                  class="form-control"
+                  id="floatingInput"
+                  placeholder="adiciona o titulo"
+                />
+                <label for="floatingInput">Titulo</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input
+                  v-model="subtitulo"
+                  type="text"
+                  class="form-control"
+                  id="floatingtext"
+                  placeholder="adiciona o titulo"
+                />
+                <label for="floatingtext">SubTitulo</label>
+              </div>
+              <div class="form-floating mb-3">
+                <select
+                  v-model="selectedCategoria"
+                  class="form-select"
+                  id="floatingSelect"
+                  aria-label="Floating label select example"
+                >
+                  <option disabled value="">Categoria</option>
+                  <option
+                    v-for="categoria in categorias"
+                    :key="categoria.id"
+                    :value="categoria.name"
+                  >
+                    {{ categoria.name }}
+                  </option>
+                </select>
+                <label for="floatingSelect">Qual a Categoria</label>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea
+                  v-model="descricao"
+                  class="form-control"
+                  placeholder="Leave a comment here"
+                  id="floatingTextarea"
+                  style="height: 150px"
+                ></textarea>
+                <label for="floatingTextarea">Noticia</label>
+              </div>
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col-sm-6 col-xl-6">
+                    <label for="formFileLg" class="form-label"
+                      >Foto atual</label
+                    >
+                    <figure class="image-container">
+                      <img
+                        class="image-img"
+                        :src="imagemPrincipal"
+                        accept="image/*"
+                      />
+                    </figure>
+                  </div>
+                  <div class="col-sm-6 col-xl-6">
+                    <label for="formFileLg" class="form-label"
+                      >Carregar foto</label
+                    >
+                    <figure class="image-container">
+                      <img
+                        class="image-img"
+                        :src="imagemVer"
+                        accept="image/*"
+                      />
+                    </figure>
+                  </div>
+                </div>
+                <input
+                  ref="imagem"
+                  v-on:change="updatePreview"
+                  class="form-control form-control-lg bg-dark"
+                  id="formFileLg"
+                  type="file"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-xl-6">
+          <div class="h-100 bg-secondary rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h6 class="mb-0">Foto Desta Galeria</h6>
+              <a href="">Ver tudo</a>
+            </div>
+            <form
+              enctype="multipart/form-data"
+              action="javascript:void(0)"
+              class="php-email-form"
+              @submit.prevent="sendMidia"
+            >
+              <div class="d-flex mb-2">
+                <div class="mb-3">
+                  <label for="formFileLg" class="form-label"
+                    >Carregar foto</label
+                  >
+                  <figure class="image-container">
+                    <img
+                      class="image-img"
+                      :src="md_imagemVer"
+                      accept="image/*"
+                    />
+                  </figure>
+                  <input
+                    ref="img"
+                    v-on:change="updatePreview_media"
+                    class="form-control form-control-lg bg-dark"
+                    id="formFileLg"
+                    type="file"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary ms-2">Add</button>
+              </div>
+            </form>
+            <div class="row g-4">
+              <div
+                class="col-sm-6 col-xl-3 col-6"
+                v-for="item in lista_medias"
+                :key="item.id"
+              >
+                <input class="form-check-input m-0" type="checkbox" />
+                <div class="w-100 ms-3">
+                  <div
+                    class="d-flex w-100 align-items-center justify-content-between"
+                  >
+                    <div>
+                      <img
+                        width="100"
+                        :src="imcaminho_img+item.img"
+                        class=""
+                        alt="#"
+                      />
+                    </div>
+                    <button class="btn btn-sm">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-bottom py-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Form End -->
+  </div>
+  <p-footer></p-footer>
+</div>

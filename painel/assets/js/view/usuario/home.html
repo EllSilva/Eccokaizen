@@ -1,0 +1,127 @@
+<div>
+
+  <!-- MAIN -->
+  <main id="main" class="main">
+
+    <section class="section contact">
+
+      <div class="row gy-4">
+
+        <div class="col-xl-12">
+          <div class="card p-4">
+ 
+            <div class="pagetitle pt-4 pb-2">
+              <h1 class="card-title text-center pb-0 fs-4">Novo Usuário</h1>
+            </div>
+
+            <form action="forms/contact.php" method="post" class="php-email-form">
+
+
+              <div class="row gy-4">
+
+              
+              <div class="form-floating pt-2"> 
+                <input type="file" class="form-control" id="formFile">
+                <label for="formFile"> .*** Foto de perfil ***</label>
+              </div>
+
+                <div class="tab-content pt-2" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                    <div class="row g-3">
+
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="nome_Input">
+                          <label for="nome_Input">Nome </label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="sobnome_Input">
+                          <label for="sobnome_Input">Sobrenome</label>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input type="email" name="email" class="form-control" id="email_Input" required>
+                          <label for="email_Input">Email </label>
+                          <div class="invalid-feedback">Por favor inserir um email válido</div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input type="password" name="password" class="form-control" id="senha_Input" required>
+                          <label for="senha_Input">Senha</label>
+                          <div class="invalid-feedback">Por favor insira a senha</div>
+
+                        </div>
+                      </div>
+
+                      <div class="col-sm-12">
+                        <div class="form-floating mb-3">
+                          <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <option selected>Brigadista</option>
+                            <option>Técnico IGCA</option>
+                            <option>Administrador</option>
+
+                          </select>
+                          <label for="floatingSelect">Cargo</label>
+                        </div>
+                      </div>
+
+
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <input type="text" class="form-control" id="telefoneInput">
+                          <label for="telefoneInput">Telefone</label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                          <select class="form-select" id="provinciaInput" aria-label="Floating label select example">
+                            <option selected>Luanda</option>
+                            <option>Bengo</option>
+                            <option>Benguela</option>
+                            <option>Bié</option>
+                            <option>Cabinda</option>
+                            <option>Cunene</option>
+                            <option>Huambo</option>
+                            <option>Huíla</option>
+                            <option>Kuando-Kubango</option>
+                            <option>Kwanza-Sul</option>
+                            <option>Kwanza-Norte</option>
+                            <option>Lunda-Norte</option>
+                            <option>Lunda-Sul</option>
+                            <option>Malanje</option>
+                            <option>Moxico</option>
+                            <option>Namibe</option>
+                            <option>Uíge</option>
+                            <option>Zaire</option>
+                          </select>
+                          <label for="provinciaInput">Província</label>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+                    </div>
+                  </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

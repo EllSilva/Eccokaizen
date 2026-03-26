@@ -1,0 +1,169 @@
+<div>
+  <p-menu></p-menu>
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+        <nav
+      class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0"
+    >
+      <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+      </a>
+      <a  @click="toggleMenu" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+      </a>
+      <form class="d-none d-md-flex ms-4">
+        <input
+          class="form-control bg-dark border-0"
+          type="search"
+          placeholder="Search"
+        />
+      </form>
+      <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+          >
+            <i class="fa fa-bell me-lg-2"></i>
+            <span class="d-none d-lg-inline-flex">Notificação</span>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
+          >
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Perfil atualizado</h6>
+              <small>15 minutos atrás</small>
+            </a>
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Novo usuário adicionado</h6>
+              <small>00</small>
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item text-center"
+              >Ver todas as notificações</a
+            >
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a
+            href="#"
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+          >
+            <img
+              class="rounded-circle me-lg-2"
+              src="img/user.jpg"
+              alt=""
+              style="width: 40px; height: 40px"
+            />
+            <span class="d-none d-lg-inline-flex">FDULAN</span>
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0"
+          >
+            <a href="#" class="dropdown-item">Meu Perfil</a>
+            <a href="#" class="dropdown-item">Configurações</a>
+            <a @click="logout" class="dropdown-item">Sair</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Sale & Revenue Start -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-6 col-xl-4">
+          <div
+            class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
+          >
+            <i class="fa fa-chart-line fa-3x text-primary"></i>
+            <div class="ms-3">
+              <p class="mb-2">Artigos publicados no blog</p>
+              <h6 class="mb-0">234</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+          <div
+            class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
+          >
+            <i class="fa fa-chart-pie fa-3x text-primary"></i>
+            <div class="ms-3">
+              <p class="mb-2"></p>
+              <h6 class="mb-0"></h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xl-4">
+          <div
+            class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"
+          >
+            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+            <div class="ms-3">
+              <p class="mb-2">Notícias Publicadas</p>
+              <h6 class="mb-0">34</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sale & Revenue End -->
+
+    <!-- Recent Sales Start -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="bg-secondary text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h6 class="mb-0">Noticias publicadas</h6>
+          <a href="">Ver tudo</a>
+        </div>
+        <div class="table-responsive">
+          <table
+            class="table text-start align-middle table-bordered table-hover mb-0"
+          >
+            <thead>
+              <tr class="text-white">
+                <th scope="col">
+                  <input class="form-check-input" type="checkbox" />
+                </th>
+                <th scope="col">Data</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">SubTitulo</th>
+                <th scope="col">Descricao</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in produtos" :key="item.id">
+                <td><input class="form-check-input" type="checkbox" /></td>
+                <td>{{item.createdAt}}</td>
+                <td>{{item.categoria}}</td>
+                <td><div class="limite-linhas2">{{item.titulo}}</div></td>
+                <td><div class="limite-linhas4">{{item.subtitulo}}</div></td>
+                <td><div class="limite-linhas4">{{item.descricao}}</div></td>
+                <td>
+                  <a class="btn btn-sm btn-primary" @click="visualizar(item.id)"
+                    >Editar</a
+                  >
+                  <button class="btn btn-sm" @click="eliminarBlog(item.id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Recent Sales End -->
+
+    <p-footer></p-footer>
+  </div>
+  <!-- Content End -->
+</div>

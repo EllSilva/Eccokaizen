@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slider de Testemunhos</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 40px;
+}
+
+.slider-container {
+  max-width: 1100px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.card {
+  min-width: calc(100% / 3);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.testimonial {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  height: 100%;
+}
+
+.testimonial p {
+  font-size: 14px;
+  color: #555;
+}
+
+.user {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.user img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user span {
+  font-size: 12px;
+  color: gray;
+}
+
+/* BOTÕES */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* PAGINAÇÃO */
+.pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background: #ccc;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #000;
+}
+
+/* RESPONSIVO */
+@media(max-width: 900px){
+  .card { min-width: calc(100% / 2); }
+}
+
+@media(max-width: 600px){
+  .card { min-width: 100%; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="slider-container">
+
+  <div class="slider" id="slider">
+
+    <!-- TESTEMUNHO -->
+    <div class="card">
+      <div class="testimonial">
+        <p>Serviço excelente! Recomendo totalmente.</p>
+        <div class="user">
+          <img src="https://i.pravatar.cc/100?img=1">
+          <div>
+            <h4>João Silva</h4>
+            <span>Cliente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="testimonial">
+        <p>Equipe profissional e rápida.</p>
+        <div class="user">
+          <img src="https://i.pravatar.cc/100?img=2">
+          <div>
+            <h4>Maria Santos</h4>
+            <span>Empresária</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="testimonial">
+        <p>Melhor investimento que fiz.</p>
+        <div class="user">
+          <img src="https://i.pravatar.cc/100?img=3">
+          <div>
+            <h4>Carlos Mendes</h4>
+            <span>Engenheiro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="testimonial">
+        <p>Atendimento impecável.</p>
+        <div class="user">
+          <img src="https://i.pravatar.cc/100?img=4">
+          <div>
+            <h4>Ana Costa</h4>
+            <span>Designer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="testimonial">
+        <p>Super recomendo o serviço!</p>
+        <div class="user">
+          <img src="https://i.pravatar.cc/100?img=5">
+          <div>
+            <h4>Pedro Alves</h4>
+            <span>Cliente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTÕES -->
+  <button class="nav-btn prev" onclick="moveSlide(-1)">❮</button>
+  <button class="nav-btn next" onclick="moveSlide(1)">❯</button>
+
+</div>
+
+<!-- PAGINAÇÃO -->
+<div class="pagination" id="pagination"></div>
+
+<script>
+let index = 0;
+const slider = document.getElementById("slider");
+const total = slider.children.length;
+
+function getVisibleCards(){
+  if(window.innerWidth <= 600) return 1;
+  if(window.innerWidth <= 900) return 2;
+  return 3;
+}
+
+function updateSlider(){
+  const visible = getVisibleCards();
+  const offset = index * (100 / visible);
+  slider.style.transform = `translateX(-${offset}%)`;
+  updateDots();
+}
+
+function moveSlide(step){
+  const visible = getVisibleCards();
+  index += step;
+
+  if(index < 0) index = total - visible;
+  if(index > total - visible) index = 0;
+
+  updateSlider();
+}
+
+/* PAGINAÇÃO */
+function createDots(){
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
+  const visible = getVisibleCards();
+  const dotsCount = total - visible + 1;
+
+  for(let i=0; i<dotsCount; i++){
+    let dot = document.createElement("span");
+    dot.classList.add("dot");
+    dot.onclick = () => {
+      index = i;
+      updateSlider();
+    };
+    pagination.appendChild(dot);
+  }
+}
+
+function updateDots(){
+  const dots = document.querySelectorAll(".dot");
+  dots.forEach(d => d.classList.remove("active"));
+  if(dots[index]) dots[index].classList.add("active");
+}
+
+/* AUTO PLAY */
+setInterval(() => {
+  moveSlide(1);
+}, 4000);
+
+/* INIT */
+window.addEventListener("resize", () => {
+  index = 0;
+  createDots();
+  updateSlider();
+});
+
+createDots();
+updateSlider();
+</script>
+
+</body>
+</html>

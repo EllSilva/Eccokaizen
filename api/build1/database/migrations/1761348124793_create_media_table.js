@@ -1,0 +1,24 @@
+import { BaseSchema } from '@adonisjs/lucid/schema';
+export default class extends BaseSchema {
+    tableName = 'media';
+    async up() {
+        this.schema.createTable(this.tableName, (table) => {
+            table.increments('id');
+            table.string('url');
+            table.string('img').notNullable();
+            table
+                .integer('noticia_id')
+                .notNullable()
+                .unsigned()
+                .references('id')
+                .inTable('noticias')
+                .onDelete('CASCADE');
+            table.timestamp('created_at').notNullable();
+            table.timestamp('updated_at').nullable();
+        });
+    }
+    async down() {
+        this.schema.dropTable(this.tableName);
+    }
+}
+//# sourceMappingURL=1761348124793_create_media_table.js.map

@@ -21,6 +21,11 @@ Vue.component('p-sobre', page_sobre)
 import page_noticia from './view/noticia/home.js'
 Vue.component('p-noticia', page_noticia)
 
+
+import page_galeria from './view/galeria/home.js'
+Vue.component('p-galeria', page_galeria)
+
+
 import page_contato from './view/contato/home.js'
 Vue.component('p-contato', page_contato)
 
@@ -33,6 +38,7 @@ const routes = [
     { path: '/servicos', component: { template: '<p-servicos></p-servicos>' } },
     { path: '/sobre', component: { template: '<p-sobre></p-sobre>' } },
     { path: '/noticias', component: { template: '<p-noticia></p-noticia>' } },
+    { path: '/galeria', component: { template: '<p-galeria></p-galeria>' } },
 
     { path: '/contato', component: { template: '<p-contato></p-contato>' } }
 ]

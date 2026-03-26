@@ -1,0 +1,95 @@
+<div>
+  <p-menu></p-menu>
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+      <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+      </a>
+      <a @click="toggleMenu" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+      </a>
+      <form class="d-none d-md-flex ms-4">
+        <input class="form-control bg-dark border-0" type="search" placeholder="Search" />
+      </form>
+      <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fa fa-bell me-lg-2"></i>
+            <span class="d-none d-lg-inline-flex">Notificação</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Perfil atualizado</h6>
+              <small>15 minutos atrás</small>
+            </a>
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item">
+              <h6 class="fw-normal mb-0">Novo usuário adicionado</h6>
+              <small>00</small>
+            </a>
+
+            <hr class="dropdown-divider" />
+            <a href="#" class="dropdown-item text-center">Ver todas as notificações</a>
+          </div>
+        </div>
+        <div class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px" />
+            <span class="d-none d-lg-inline-flex">ECCO</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+            <a href="#" class="dropdown-item">Meu Perfil</a>
+            <a href="#" class="dropdown-item">Configurações</a>
+            <a @click="logout" class="dropdown-item">Sair</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+    <!-- Form Start -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-secondary rounded h-100 p-4">
+            <h6 class="mb-4">Adicionar Testemunho</h6>
+            <form enctype="multipart/form-data" action="javascript:void(0)" class="php-email-form"
+              @submit.prevent="sendFile">
+
+              <div class="mb-3">
+                <label for="formFileLg" class="form-label">Carregar foto</label>
+                <figure class="image-container">
+                  <img class="image-img" :src="imagemVer" accept="image/*" />
+                </figure>
+                <input ref="img" v-on:change="updatePreview" class="form-control form-control-lg bg-dark"
+                  id="formFileLg" type="file" />
+              </div>
+              <div class="form-floating mb-3">
+                <input v-model="titulo" type="text" class="form-control" id="floatingInput"
+                  placeholder="adiciona o titulo" />
+                <label for="floatingInput">Titulo</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <textarea v-model="descricao" class="form-control" placeholder="Leave a comment here"
+                  id="floatingTextarea" style="height: 150px"></textarea>
+                <label for="floatingTextarea">Noticia</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input v-model="autor" type="text" class="form-control" id="floatingtext"
+                  placeholder="adiciona o titulo" />
+                <label for="floatingtext">Actor</label>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar Dados</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Form End -->
+    <p-footer></p-footer>
+  </div>
+</div>
