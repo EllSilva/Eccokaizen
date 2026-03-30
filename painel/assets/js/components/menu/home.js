@@ -24,7 +24,7 @@ export default {
     mounted() {
     window.addEventListener('hashchange', () => {
       this.currentRoute = window.location.hash.replace('#', '');
-    });
+    });   
   },
 
   template: await get_template("./assets/js/components/menu/home"),

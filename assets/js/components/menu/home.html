@@ -37,21 +37,24 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Home</a>
+                        <a class="nav-link" :class="{ active: currentRoute === '/' }" href="index.html" >Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" :class="{ active: currentRoute === '/sobre' }" href="#/sobre">Sobre nós</a>
+                    </li>
+                      <li class="nav-item">
+                        <a class="nav-link" :class="{ active: currentRoute === '/servicos' }" href="#/servicos">Serviços</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#/servicos">Serviços</a>
+                        <a class="nav-link" :class="{ active: currentRoute === '/noticias' }" href="#/noticias">Noticias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#/Noticias">Noticias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#/galeria">Galeria</a>
+                        <a class="nav-link" :class="{ active: currentRoute === '/galeria' }" href="#/galeria">Galeria</a>
                     </li>
                   
                     <li class="nav-item">
-                        <a class="nav-link" href="#/contato">Contacto</a>
+                        <a class="nav-link" :class="{ active: currentRoute === '/contato' }" href="#/contato">Contacto</a>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,7 @@
-import get_template from '../../components/get_template.js'
-import api from "../../../../../static/js/api/adm.js"
-
+import get_template from "../../components/get_template.js";
+import api from "../../../../../static/js/api/adm.js";
+import { isAuthenticated } from "../../components/auth.js";
+import { bus } from "../../components/bus.js"; // ajuste o caminho conforme a tua pasta
 
 export default {
   data: function () {
@@ -8,76 +9,43 @@ export default {
       error: null,
       msg: null,
       file: "",
+      lista_galerias: [],
       titulo: null,
-      categoria: null,
-      estado: null,
-      link: null,
-      imagemLink: null,
-      descricao: null,
-
-      img1: null,
-      img2: null,
-      img3: null,
-      img4: null,
-      img5: null,
-      img6: null,
-      img7: null,
-      img8: null,
-      img9: null,
-      img10: null,
-      img11: null,
-      img12: null,
-      img13: null,
-      img14: null,
-      img15: null,
-      img16: null,
-      
-      nome1: null,
-      nome2: null,
-      nome3: null,
-      nome4: null,
-      nome5: null,
-      nome6: null,
-      nome7: null,
-      nome8: null,
-      nome9: null,
-      nome10: null,
-      nome11: null,
-      nome12: null,
-      nome13: null,
-      nome14: null,
-      nome15: null,
-      nome16: null,
-      nome17: null,
-      nome18: null,
-      nome19: null,
-      nome20: null,
-    
+      imagem: null,
+      imagemPrincipal: null,
+      nome: null,
       imagemVer: null,
-      showFoto: true,
-      showLink: false,
-      inputs: [],
-    
-    }
+      md_nome: null,
+      md_imagemVer: null,
+
+      caminho_img: null,
+
+      lista_medias: [],
+
+      url: null,
+      img: null,
+      noticiaId: null,
+
+      selectedCategoria: "",
+      categorias: [
+        { id: 1, name: "Noticia" },
+        { id: 2, name: "Promocao" },
+        { id: 4, name: "Atividade" },
+        { id: 4, name: "Galeria" },
+        { id: 5, name: "outro" },
+      ]
+    };
   },
-
-  async mounted() {
-
-  },
- 
-
 
   methods: {
 
-
-    Btn_link() {
-      this.showFoto = false;
-      this.showLink = true;
+    toggleMenu() {
+      bus.$emit("toggle-menu"); // dispara o evento
     },
 
-    Btn_foto() {
-      this.showLink = false;
-      this.showFoto = true;
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
     },
 
     exemploRemover() {
@@ -85,93 +53,39 @@ export default {
     },
 
     updatePreview(e) {
-
-      const fileList = e.target.files;
-      for (let file of fileList) {
-        console.log(file);
-      }
-
       var file,
         files = e.target.files;
       if (files.length === 0) {
         alert("foto nao foi escolhido ");
       }
-
+      console.log(files);
       var imgTamanho = files[0].size;
       if (imgTamanho < 2035028) {
-
-
-        console.log(files.length);
-
         file = new FileReader();
-        this.selectedFile = e.target.files[0]
         file.onload = (e) => {
-          this.imagemVer = e.target.result;
-          this.nome = files[0].name;
+          this.md_imagemVer = e.target.result;
+          this.md_nome = files[0].name;
         };
       } else {
         alert("o tamanho da imagem deve ser menor que 2MBs");
       }
 
       file.readAsDataURL(files[0]);
-
     },
 
 
- 
-
-    async sendFile32323() {
-      alert("oi")
-
-      let dataForm = new FormData();
-      dataForm.append("img", this.selectedFile, this.selectedFile.name);
-
-      axios.post('https://api.ark-tracos.com/api/projectos/1/img', dataForm)
-        .then(res => {
-          console.log(res)
-        });
-    },
-
-  
-
-    async sendFile() {
+    async sendGaleria() {
 
       let dataForm = new FormData();
       dataForm.append("titulo", this.titulo);
-      dataForm.append("categoria", this.categoria);
-      dataForm.append("estado", this.estado);
-      dataForm.append("img1", this.$refs.img1.files[0]);
-      dataForm.append("img2", this.$refs.img2.files[0]);
-      dataForm.append("img3", this.$refs.img3.files[0]);
-      dataForm.append("img4", this.$refs.img4.files[0]);
-      dataForm.append("img5", this.$refs.img5.files[0]);
-      dataForm.append("img6", this.$refs.img6.files[0]);
-      dataForm.append("img7", this.$refs.img7.files[0]);
-      dataForm.append("img8", this.$refs.img8.files[0]); 
-      dataForm.append("img9", this.$refs.img9.files[0]);
-      dataForm.append("img10", this.$refs.img10.files[0]); 
-      dataForm.append("img11", this.$refs.img11.files[0]);
-      dataForm.append("img12", this.$refs.img12.files[0]);
-      dataForm.append("img13", this.$refs.img13.files[0]);
-      dataForm.append("img14", this.$refs.img14.files[0]);
-      dataForm.append("img15", this.$refs.img15.files[0]);
-      dataForm.append("img16", this.$refs.img16.files[0]);
+      dataForm.append("imagem", this.$refs.img.files[0]);
 
-      dataForm.append("img17", this.$refs.img17.files[0]);
-      dataForm.append("img18", this.$refs.img18.files[0]);
-      dataForm.append("img19", this.$refs.img19.files[0]);
-      dataForm.append("img20", this.$refs.img20.files[0]);
-      dataForm.append("descricao", this.descricao);
 
-console.log(dataForm)
+      let res = await fetch(`http://localhost:3333/galeria`, {
+        method: "POST",
+        body: dataForm,
+      });
 
-      let res = await fetch(
-        `https://api.ark-tracos.com/api/projectos`,
-        {
-          method: "POST",
-          body: dataForm,
-        }
-      );
 
       let data = await res.json();
 
@@ -191,39 +105,63 @@ console.log(dataForm)
         message: this.msg,
         position: "bottomCenter",
       });
-
     },
 
+    async eliminar(index) {
+      // let res = await api.deleter_Blog(this.id); DELETE
+      this.editIndex = index;
 
-    async cadastra_link() {
+      let dataForm = new FormData();
 
-      alert("link")
-      this.error = null;
+      let res = await fetch(
+        `http://localhost:3333/galeria/` + this.editIndex,
+        {
+          method: "DELETE",
+          body: dataForm,
+        }
+      );
 
-      // localStorage.removeItem('token')
-      let res = await api.cadastra_projeto(this.titulo, this.categoria, this.link);
+      let data = await res.json();
 
-      if (res.error) {
-        this.error = res.message;
+      if (!data) {
+        this.error = data.message;
         iziToast.error({
           title: "Error",
           message: this.error,
           position: "bottomCenter",
         });
+
         return null;
       }
 
-      this.msg = res.message;
+      this.msg = data.message;
       iziToast.success({
         title: "OK",
         message: this.msg,
         position: "bottomCenter",
       });
+      this.produtos = (await this.listar()).data;
     },
+
+    async listar() {
+      let res = await api.lista_galeria();
+      this.lista_galerias = res
+
+      return res;
+    },
+
+
+
 
   },
 
+  async mounted() {
 
+    this.imcaminho_img = "http://localhost:3333/carregar_img/";
+    this.id = this.$route.params.id;
+
+    this.listar()
+  },
 
   template: await get_template('./assets/js/view/galeria/cadastro')
 }

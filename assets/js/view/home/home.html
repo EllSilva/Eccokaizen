@@ -256,7 +256,8 @@
 
             <div id="projects" class="projects-main row">
 
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item business">
+                <div class="col-lg-4 col-sm-6 pro-item portfolio-item business" v-for="post in ultimas4Postagens"
+                    :key="post.id">
                     <div class="post-slide">
                         <div class="post-header">
                             <h4 class="title">
@@ -264,70 +265,22 @@
                             </h4>
                             <ul class="post-bar">
                                 <li><img src="./assets/images/testi_01.png" alt=""><a href="#">ECCOKAIZEN</a></li>
-                                <li><i class="fa fa-calendar"></i>21 de Março de 2026</li>
+                                <li><i class="fa fa-calendar"></i>{{ formatarData(post.createdAt) }}</li>
                             </ul>
                         </div>
                         <div class="pic">
-                            <img src="./assets/images/img-3.jpg" alt="">
+                            <img :src="caminho_img + post.imagem" alt="" style=" height: 220px; object-fit: cover;">
                             <ul class="post-category">
-                                <li><a href="#">Estratégia </a></li>
-                                <li><a href="#">Empresarial</a></li>
+                                <li><a href="#">{{ post.categoria }} </a></li>
                             </ul>
                         </div>
                         <p class="post-description">
-                            Crescer no mercado exige mais do que esforço — exige estratégia. Na ECCOKAIZEN, trabalhamos
-                            com empresas para desenvolver planos estratégicos personalizados
+                            {{ post.descricao }}
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item travel">
-                    <div class="post-slide">
-                        <div class="post-header">
-                            <h4 class="title">
-                                <a href="#">Última postagem do blog</a>
-                            </h4>
-                            <ul class="post-bar">
-                                <li><img src="./assets/images/testi_01.png" alt=""><a href="#">ECCOKAIZEN</a></li>
-                                <li><i class="fa fa-calendar"></i>23 de Março de 2026</li>
-                            </ul>
-                        </div>
-                        <div class="pic">
-                            <img src="./assets/images/img-2.jpg" alt="">
-                            <ul class="post-category">
-                                <li><a href="#">Gestão </a></li>
-                                <li><a href="#">Financeira</a></li>
-                            </ul>
-                        </div>
-                        <p class="post-description">
-                            Uma boa gestão financeira é a base de qualquer empresa de sucesso. Muitas organizações
-                            enfrentam dificuldades não por falta de clientes...
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial academic">
-                    <div class="post-slide">
-                        <div class="post-header">
-                            <h4 class="title">
-                                <a href="#">Última postagem do blog</a>
-                            </h4>
-                            <ul class="post-bar">
-                                <li><img src="./assets/images/testi_01.png" alt=""><a href="#">ECCOKAIZEN</a></li>
-                                <li><i class="fa fa-calendar"></i>29 de Março de 2026</li>
-                            </ul>
-                        </div>
-                        <div class="pic">
-                            <img src="./assets/images/img-1.jpg" alt="">
-                            <ul class="post-category">
-                                <li><a href="#">Consultoria </a></li>
-                                <li><a href="#">Fiscal</a></li>
-                            </ul>
-                        </div>
-                        <p class="post-description">
-                            O cumprimento das obrigações fiscais é essencial para o funcionamento legal de qualquer
-                            empresa. No entanto, muitos empresários...
-                        </p>
-                    </div>
-                </div>
+
+ 
             </div>
             <!-- /.row -->
         </div>
@@ -339,106 +292,43 @@
         <div class="portfolio-main">
             <h2>Testemunho</h2>
 
- 
+
             <div class="dots" id="dots"></div>
 
+            <div class="slider-container" @mouseenter="stopAutoPlay" @mouseleave="startAutoPlay">
 
+                <div class="slider" :style="sliderStyle" @touchstart="touchStart" @touchend="touchEnd">
 
-            <div class="slider-container">
-
-                <div class="slider" id="slider">
-
-                    <!-- TESTEMUNHO -->
-                    <div class="card2">
+                    <div class="card2" v-for="(item, i) in slides" :key="i">
                         <div class="testimonial">
-                            <p>Serviço excelente! Recomendo totalmente.</p>
+                            <p>{{ item.descricao }}</p>
+
                             <div class="user">
-                                <img src="https://i.pravatar.cc/100?img=1">
                                 <div>
-                                    <h4>João Silva</h4>
-                                    <span>Cliente</span>
+                                    <h4>{{ item.autor }}</h4>
+                                    <span>FeedBack</span>
                                 </div>
                             </div>
+
+                            <img  :src="caminho_img + item.imagem"   alt="" srcset="" style=" height: 450px; object-fit: cover;">
+
                         </div>
                     </div>
 
-                    <div class="card2">
-                        <div class="testimonial">
-                            <p>Equipe profissional e rápida.</p>
-                            <div class="user">
-                                <img src="https://i.pravatar.cc/100?img=2">
-                                <div>
-                                    <h4>Maria Santos</h4>
-                                    <span>Empresária</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card2">
-                        <div class="testimonial">
-                            <p>Melhor investimento que fiz.</p>
-                            <div class="user">
-                                <img src="https://i.pravatar.cc/100?img=3">
-                                <div>
-                                    <h4>Carlos Mendes</h4>
-                                    <span>Engenheiro</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card2">
-                        <div class="testimonial">
-                            <p>Atendimento impecável.</p>
-                            <div class="user">
-                                <img src="./assets/images/testemunha/testimonial-2.jpg">
-                                <div>
-                                    <h4>Ana Costa</h4>
-                                    <span>Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card2">
-                        <div class="testimonial">
-                            <p>Super recomendo o serviço!</p>
-                            <div class="user">
-                                <img src="./assets/images/testemunha/testimonial-1.jpg">
-                                <div>
-                                    <h4>Pedro Alves</h4>
-                                    <span>Cliente</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card2">
-                        <div class="testimonial">
-                            <p>Atendimento impecável.</p>
-                            <div class="user">
-                                <img src="./assets/images/testemunha/testimonial-3.jpg">
-                                <div>
-                                    <h4>Ana Costa</h4>
-                                    <span>Designer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- BOTÕES -->
-                <button class="nav-btn2 prev2" onclick="moveSlide(-1)">❮</button>
-                <button class="nav-btn2 next2" onclick="moveSlide(1)">❯</button>
+                <button class="nav-btn2 prev2" @click="move(-1)">❮</button>
+                <button class="nav-btn2 next2" @click="move(1)">❯</button>
+
+                <!-- PAGINAÇÃO -->
+                <div class="pagination2">
+                    <span v-for="(dot, i) in total" :key="i" class="dot" :class="{ active: i === currentIndex % total }"
+                        @click="goTo(i)"></span>
+                </div>
 
             </div>
 
-            <!-- PAGINAÇÃO -->
-            <div class="pagination2" id="pagination2"></div>
- 
-          
         </div>
     </div>
 
@@ -451,96 +341,26 @@
             <div class="dots" id="dots"></div>
 
             <div id="projects" class="projects-main row">
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial">
+
+                <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial" v-for="post in ultimas8Galeria"
+                    :key="post.id">
                     <div class="card h-100">
                         <div class="card-img">
-                            <a href="./assets/images/team_01.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_01.jpg" alt="" />
+                            <a :href="caminho_img + post.imagem" data-fancybox="images">
+                                <img class="card-img-top" :src="caminho_img + post.imagem" alt=""
+                                    style=" height: 200px; object-fit: cover;" />
                                 <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
                             </a>
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
+                                <a href="#"> {{ post.titulo }}</a>
                             </h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item business academic">
-                    <div class="card h-100">
-                        <div class="card-img">
-                            <a href="./assets/images/team_02.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_02.jpg" alt="" />
-                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item travel">
-                    <div class="card h-100">
-                        <div class="card-img">
-                            <a href="./assets/images/team_03.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_03.jpg" alt="" />
-                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item business">
-                    <div class="card h-100">
-                        <div class="card-img">
-                            <a href="./assets/images/team_04.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_04.jpg" alt="" />
-                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item travel">
-                    <div class="card h-100">
-                        <div class="card-img">
-                            <a href="./assets/images/team_05.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_05.jpg" alt="" />
-                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial academic">
-                    <div class="card h-100">
-                        <div class="card-img">
-                            <a href="./assets/images/team_01.jpg" data-fancybox="images">
-                                <img class="card-img-top" src="./assets/images/team_01.jpg" alt="" />
-                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href="#">Financial Sustainability</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
             <!--row -->
         </div>

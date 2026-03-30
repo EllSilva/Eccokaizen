@@ -31,10 +31,8 @@ Vue.component('p-contato', page_contato)
 
 Vue.use(Router)
 
-
-
 const routes = [
-    { path: '/', component: { template: '<p-home></p-home>' } },
+    { path: '/', name:"editar_testemunho", component: { template: '<p-home></p-home>' } },
     { path: '/servicos', component: { template: '<p-servicos></p-servicos>' } },
     { path: '/sobre', component: { template: '<p-sobre></p-sobre>' } },
     { path: '/noticias', component: { template: '<p-noticia></p-noticia>' } },

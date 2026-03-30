@@ -24,63 +24,20 @@
                 <div class="col-md-8 blog-entries">
                     <div class="row">
                         <!-- Blog Post -->
-                        <div class="col-md-6">
+                        <div class="col-md-6" v-for="post in ultimasPostagens"
+                    :key="post.id">
                             <div class="card mb-4">
-                                <img class="card-img-top" src="./assets/images/blog-img-01.jpg" alt="Card image Blog" />
+                                <img class="card-img-top"  :src="caminho_img + post.imagem" alt="" style=" height: 250px; object-fit: cover;" alt="Card image Blog" />
                                 <div class="card-body">
                                     <div class="by-post">
-                                        Postado em 18 de Março de 2026 por <a href="#">ECCOKAIZEN</a>
+                                        Postado em {{ formatarData(post.createdAt) }} por <a href="#">ECCOKAIZEN</a>
                                     </div>
-                                    <h2 class="card-title">A Importância da Organização Financeira nas Empresas</h2>
-                                    <p class="card-text">Uma boa gestão financeira é a base de qualquer empresa de sucesso. Muitas organizações enfrentam dificuldades não por falta de clientes, mas por ausência de controlo financeiro adequado...!</p>
+                                    <h2 class="card-title">{{ post.titulo }}</h2>
+                                    <p class="card-text">  {{ post.descricao }}</p>
                                     <a href="#" class="btn btn-primary">Ler mais &rarr;</a>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Blog Post -->
-                        <div class="col-md-6">
-                            <div class="card mb-4">
-                                <img class="card-img-top" src="./assets/images/blog-img-02.jpg" alt="Card image Blog">
-                                <div class="card-body">
-                                    <div class="by-post">
-                                        Postado em 18 de Março de 2026 por <a href="#">ECCOKAIZEN</a>
-                                    </div>
-                                    <h2 class="card-title">Como Cumprir as Obrigações Fiscais Sem Complicações</h2>
-                                    <p class="card-text">O cumprimento das obrigações fiscais é essencial para o funcionamento legal de qualquer empresa. No entanto, muitos empresários enfrentam dificuldades devido à complexidade dos processos...</p>
-                                    <a href="#" class="btn btn-primary">Ler mais &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Blog Post -->
-                        <div class="col-md-6">
-                            <div class="card mb-4">
-                                <img class="card-img-top" src="./assets/images/blog-img-03.jpg" alt="Card image Blog">
-                                <div class="card-body">
-                                    <div class="by-post">
-                                        Postado em 18 de Março de 2026 por <a href="#">ECCOKAIZEN</a>
-                                    </div>
-                                    <h2 class="card-title">A Importância da Consultoria Empresarial para Pequenos Negócios</h2>
-                                    <p class="card-text">Muitos pequenos negócios enfrentam desafios por falta de orientação profissional. A consultoria empresarial permite identificar erros, melhorar processos e aumentar a eficiência.</p>
-                                    <a href="#" class="btn btn-primary">Ler mais &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Blog Post -->
-                        <div class="col-md-6">
-                            <div class="card mb-4">
-                                <img class="card-img-top" src="./assets/images/blog-img-03.jpg" alt="Card image Blog">
-                                <div class="card-body">
-                                    <div class="by-post">
-                                        Postado em 18 de Março de 2026 por <a href="#">ECCOKAIZEN</a>
-                                    </div>
-                                    <h2 class="card-title">Gestão Eficiente: O Segredo das Empresas de Sucesso</h2>
-                                    <p class="card-text">Empresas bem-sucedidas têm algo em comum: uma gestão eficiente. Isso envolve organização, planeamento e controlo de todas as áreas do negócio.</p>
-                                    <a href="#" class="btn btn-primary">Ler mais &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
-
+                        </div> 
                     </div>
                     <div class="pagination_bar_arrow">
                         <!-- Pagination -->

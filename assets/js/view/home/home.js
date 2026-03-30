@@ -1,86 +1,149 @@
 import get_template from "../../components/get_template.js";
+import api from "../../../../static/js/api/adm.js";
 
 export default {
-    data: function() {
-        return {
-            title: "home",
-        };
-    },
+  data: function () {
+    return {
+      title: "home",
+      ultimas4Postagens: [],
+      ultimas8Galeria: [],
+      caminho_img: null,
 
-    methods: {
+      currentIndex: 0,
+      startX: 0,
+      interval: null,
 
+      testimonials: []
 
-
-    },
-
-    async mounted() {
-
-        let index = 0;
-const slider = document.getElementById("slider");
-const total = slider.children.length;
-
-function getVisibleCard2s(){
-  if(window.innerWidth <= 600) return 1;
-  if(window.innerWidth <= 900) return 2;
-  return 3;
-}
-
-function updateSlider(){
-  const visible = getVisibleCard2s();
-  const offset = index * (100 / visible);
-  slider.style.transform = `translateX(-${offset}%)`;
-  updateDots();
-}
-
-function moveSlide(step){
-  const visible = getVisibleCard2s();
-  index += step;
-
-  if(index < 0) index = total - visible;
-  if(index > total - visible) index = 0;
-
-  updateSlider();
-}
-
-/* PAGINAÇÃO */
-function createDots(){
-  const pagination2 = document.getElementById("pagination2");
-  pagination2.innerHTML = "";
-  const visible = getVisibleCard2s();
-  const dotsCount = total - visible + 1;
-
-  for(let i=0; i<dotsCount; i++){
-    let dot = document.createElement("span");
-    dot.classList.add("dot");
-    dot.onclick = () => {
-      index = i;
-      updateSlider();
     };
-    pagination2.appendChild(dot);
-  }
-}
+  },
 
-function updateDots(){
-  const dots = document.querySelectorAll(".dot");
-  dots.forEach(d => d.classList.remove("active"));
-  if(dots[index]) dots[index].classList.add("active");
-}
+  computed: {
+    visible() {
+      if (window.innerWidth <= 600) return 1
+      if (window.innerWidth <= 900) return 2
+      return 3
+    },
 
-/* AUTO PLAY */
-setInterval(() => {
-  moveSlide(1);
-}, 4000);
+    slides() {
+      // CLONE para loop infinito
+      return [...this.testimonials, ...this.testimonials.slice(0, this.visible)]
+    },
 
-/* INIT */
-window.addEventListener("resize", () => {
-  index = 0;
-  createDots();
-  updateSlider();
-});
+    total() {
+      return this.testimonials.length
+    },
 
-createDots();
-updateSlider();
+    sliderStyle() {
+      const offset = this.currentIndex * (100 / this.visible)
+      return {
+        transform: `translateX(-${offset}%)`,
+        transition: "0.5s ease"
+      }
+    }
+  },
+
+  methods: {
+
+    move(step) {
+      this.currentIndex += step
+
+      if (this.currentIndex >= this.total) {
+        setTimeout(() => {
+          this.currentIndex = 0
+        }, 500)
+      }
+
+      if (this.currentIndex < 0) {
+        this.currentIndex = this.total - 1
+      }
+    },
+
+    goTo(i) {
+      this.currentIndex = i
+    },
+
+    startAutoPlay() {
+      this.interval = setInterval(() => {
+        this.move(1)
+      }, 4000)
+    },
+
+    stopAutoPlay() {
+      clearInterval(this.interval)
+    },
+
+    touchStart(e) {
+      this.startX = e.touches[0].clientX
+    },
+
+    touchEnd(e) {
+      let endX = e.changedTouches[0].clientX
+
+      if (this.startX - endX > 50) this.move(1)
+      if (endX - this.startX > 50) this.move(-1)
+    },
+
+    async listarUltimosNoticia() {
+      const res = await api.lista_blog();
+      const posts = res.data;
+
+      this.ultimas4Postagens = posts
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 4);
+    },
+
+    async listarUltimaGaleria() {
+      const res = await api.lista_galeria();
+      const posts = res;
+
+      this.ultimas8Galeria = posts
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 8);
+    },
+
+    async listarTestemunho() {
+      const res = await api.lista_testemunhos();
+      this.testimonials = res.data;
+ 
+      console.log(this.testimonials)
+    },
+
+    formatarData(data) {
+      const d = new Date(data);
+      const dia = String(d.getDate()).padStart(2, "0");
+      const mes = String(d.getMonth() + 1).padStart(2, "0");
+      const ano = d.getFullYear();
+
+      return `${dia}/${mes}/${ano}`;
+    },
+
+    async visualizar(id) {
+      this.$router.push({ name: "detalhe_evento", params: { id } });
+      this.codigo = this.$route.params.id;
 
     },
-    template: await get_template("./assets/js/view/home/home"),
+
+
+  },
+
+  async mounted() {
+
+    this.startAutoPlay()
+
+    window.addEventListener("resize", () => {
+      this.currentIndex = 0
+    })
+
+    this.caminho_img = "http://localhost:3333/carregar_img/";
+
+    await this.listarUltimosNoticia();
+    await this.listarUltimaGaleria();
+     await this.listarTestemunho();
+   
+
+
+  },
+
+  template: await get_template("./assets/js/view/home/home"),
 };

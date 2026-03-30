@@ -18,6 +18,8 @@ const SessionController = () => import('#controllers/session_controller')
 const NoticiaController = () => import('#controllers/noticias_controller')
 import TestemunhoController from '#controllers/testemunhos_controller'
 import ComentarioController from '#controllers/comentarios_controller'
+ import PortfolioController from '#controllers/portfolios_controller'
+const GaleriaController = () => import('#controllers/galerias_controller')
  
 
  router.post('users/:id/tokens', async ({ params }) => {
@@ -37,12 +39,14 @@ router.delete('session', [SessionController, 'destroy'])
   .use(middleware.auth({ guards: ['api'] }))
 router.post('/login', [SessionController, 'login']).as('auth.login')
 router.delete('/logout', [SessionController, 'logout']).as('auth.logout').use(middleware.auth())
- 
+
 router.resource('users', UsersControllers);
 router.resource('noticias', NoticiaController);
 router.resource('media', MediasController);
 router.resource('testemunhos', TestemunhoController);
 router.resource('comentarios', ComentarioController);
+router.resource('galeria', GaleriaController);
+router.resource('portfolio', PortfolioController);
 
 router.get('/carregar_img/:file', async ({ response, params }) => {
   const filePath = app.makePath(`storage/uploads/${params.file}`)

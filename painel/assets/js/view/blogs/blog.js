@@ -14,19 +14,19 @@ export default {
   },
 
   methods: {
-        toggleMenu() {
-          bus.$emit("toggle-menu"); // dispara o evento
-        },
-    
-        logout() {
-          localStorage.removeItem("token");
-          this.$router.push("/");
-        },
+    toggleMenu() {
+      bus.$emit("toggle-menu"); // dispara o evento
+    },
+
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/");
+    },
 
     async visualizar(id) {
       this.$router.push({ name: "editar_blog", params: { id } });
       this.codigo = this.$route.params.id;
-      
+
     },
 
     async listar() {
@@ -42,7 +42,7 @@ export default {
       let dataForm = new FormData();
 
       let res = await fetch(
-        `https://api.fdulan.ao/noticias/` + this.editIndex,
+        `http://localhost:3333/noticias/` + this.editIndex,
         {
           method: "DELETE",
           body: dataForm,
@@ -85,7 +85,7 @@ export default {
   async mounted() {
     let dados = (await this.listar()).data;
 
-    this.img = "https://api.ark-tracos.com/uploads/";
+    this.img = "http://localhost:3333/carregar_img/";
 
     this.produtos = (await this.listar()).data;
     // Formatar a data

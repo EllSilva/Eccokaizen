@@ -46,7 +46,7 @@ export default class NoticiasController {
     try {
       //ENVIO DE IMAGEM
       const img = request.file('imagem', this.validationOptions)
-
+   
       if (img) {
         const imgName = `${cuid()}.${img!.extname}`
         await img.move(app.makePath('storage/uploads'), {

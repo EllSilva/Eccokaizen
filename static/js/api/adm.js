@@ -66,6 +66,15 @@ export default {
     async lista_testemunho_id(id) {
         return await http.get('/testemunhos/'+id)
     },
+
+      async lista_galeria() {
+        return await http.get('/galeria')
+    }, 
+    
+   async lista_testemunhos() {
+        return await http.get('/testemunhos')
+    }, 
+    
     
         /*! 
     async recuperar_password(email) {
@@ -74,9 +83,7 @@ export default {
         })
     },
 
-      async lista_portifolio() {
-        return await http.get('/portifolio')
-    }, 
+    
 
     async alterar_password(password, token) {
         return await http.post('/alterar-password', {

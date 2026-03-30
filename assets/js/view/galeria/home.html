@@ -16,123 +16,46 @@
         </div>
     </div>
 
+
+
+
+
+    <div class="container">
+        <!-- Portfolio Section -->
+        <div class="portfolio-main">
+         
+            <div class="dots" id="dots"></div>
+
+            <div id="projects" class="projects-main row">
+
+                <div class="col-lg-4 col-sm-6 pro-item portfolio-item financial" v-for="post in ultimas8Galeria"
+                    :key="post.id">
+                    <div class="card h-100">
+                        <div class="card-img">
+                            <a :href="caminho_img + post.imagem" data-fancybox="images">
+                                <img class="card-img-top" :src="caminho_img + post.imagem" alt=""
+                                    style=" height: 200px; object-fit: cover;" />
+                                <div class="overlay"><i class="fas fa-arrows-alt"></i></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="#"> {{ post.titulo }}</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+
+ 
+            </div>
+            <!--row -->
+        </div>
+    </div>
+ 
+ 
     <div class="portfolio-col">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-01.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-02.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-03.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-04.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-04.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-01.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-02.jpg" alt="" />
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-                    <div class="card h-100">
-                        <a class="hover-box" href="#">
-                            <div class="dot-full">
-                                <i class="fas fa-link"></i>
-                            </div>
-                            <img class="card-img-top" src="./assets/images/portfolio-big-03.jpg" alt="">
-                        </a>
-                        <div class="card-body">
-                            <h4><a href="#">descricao da foto.</a></h4>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+         
             <div class="pagination_bar">
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center">
