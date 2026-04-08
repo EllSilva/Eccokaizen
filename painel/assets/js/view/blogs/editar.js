@@ -105,7 +105,7 @@ export default {
       dataForm.append("img", this.$refs.img.files[0]);
       dataForm.append("noticiaId", this.id);
 
-      let res = await fetch(`http://localhost:3333/media`, {
+      let res = await fetch(`https://api.ecco.ao/media`, {
         method: "POST",
         body: dataForm,
       });
@@ -143,7 +143,7 @@ export default {
       dataForm.append("autor", this.autor);
       dataForm.append("noticiaId", this.id);
 
-      let res = await fetch(`http://localhost:3333/noticias/`+this.id, {
+      let res = await fetch(`https://api.ecco.ao/noticias/`+this.id, {
         method: "PUT",
         body: dataForm,
       });
@@ -201,7 +201,7 @@ export default {
   },
 
   async mounted() {
-    this.imcaminho_img = "http://localhost:3333/carregar_img/";
+    this.imcaminho_img = "https://api.ecco.ao/carregar_img/";
     this.id = this.$route.params.id;
 
     this.executar();

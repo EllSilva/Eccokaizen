@@ -21,7 +21,7 @@ export default {
     },
 
     async mounted() {
-        this.caminho_img = "http://localhost:3333/carregar_img/";
+        this.caminho_img = "https://api.ecco.ao/carregar_img/";
 
 
         await this.listarUltimaGaleria();

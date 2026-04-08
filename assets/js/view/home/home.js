@@ -1,6 +1,6 @@
 import get_template from "../../components/get_template.js";
 import api from "../../../../static/js/api/adm.js";
-
+ 
 export default {
   data: function () {
     return {
@@ -13,6 +13,8 @@ export default {
       startX: 0,
       interval: null,
 
+      modalOpen: false,
+      selected: {},
       testimonials: []
 
     };
@@ -84,6 +86,15 @@ export default {
       if (endX - this.startX > 50) this.move(-1)
     },
 
+    openModal(item) {
+      this.selected = item;
+      this.modalOpen = true;
+    },
+
+    closeModal() {
+      this.modalOpen = false;
+    },
+
     async listarUltimosNoticia() {
       const res = await api.lista_blog();
       const posts = res.data;
@@ -105,8 +116,6 @@ export default {
     async listarTestemunho() {
       const res = await api.lista_testemunhos();
       this.testimonials = res.data;
- 
-      console.log(this.testimonials)
     },
 
     formatarData(data) {
@@ -118,12 +127,12 @@ export default {
       return `${dia}/${mes}/${ano}`;
     },
 
+
     async visualizar(id) {
-      this.$router.push({ name: "detalhe_evento", params: { id } });
+      this.$router.push({ name: "detalhe", params: { id } });
       this.codigo = this.$route.params.id;
 
     },
-
 
   },
 
@@ -135,12 +144,22 @@ export default {
       this.currentIndex = 0
     })
 
-    this.caminho_img = "http://localhost:3333/carregar_img/";
+
+
+
+
+
+
+
+
+    
+
+    this.caminho_img = "https://api.ecco.ao/carregar_img/";
 
     await this.listarUltimosNoticia();
     await this.listarUltimaGaleria();
-     await this.listarTestemunho();
-   
+    await this.listarTestemunho();
+
 
 
   },

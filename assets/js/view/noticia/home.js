@@ -6,11 +6,27 @@ export default {
         return {
             title: "Contato",
             ultimasPostagens: [],
+            termoBusca: "" // texto digitado
+        }
+    },
+
+    computed: {
+        postsFiltrados() {
+            if (!this.termoBusca) {
+                return this.ultimasPostagens;
+            }
+
+            return this.ultimasPostagens.filter(post =>
+                post.titulo.toLowerCase().includes(this.termoBusca.toLowerCase()) ||
+                post.subtitulo.toLowerCase().includes(this.termoBusca.toLowerCase())
+            );
         }
     },
 
     methods: {
- 
+   selecionarPalavra(palavra) {
+            this.termoBusca = palavra;
+        },
         async listarUltimosNoticia() {
             const res = await api.lista_blog();
             const posts = res.data;
@@ -32,7 +48,7 @@ export default {
         },
 
         async visualizar(id) {
-            this.$router.push({ name: "detalhe_evento", params: { id } });
+            this.$router.push({ name: "detalhe", params: { id } });
             this.codigo = this.$route.params.id;
 
         },
@@ -42,7 +58,7 @@ export default {
 
     async mounted() {
 
-        this.caminho_img = "http://localhost:3333/carregar_img/";
+        this.caminho_img = "https://api.ecco.ao/carregar_img/";
 
         await this.listarUltimosNoticia();
 

@@ -21,10 +21,14 @@ Vue.component('p-sobre', page_sobre)
 import page_noticia from './view/noticia/home.js'
 Vue.component('p-noticia', page_noticia)
 
+import page_noticia_detalhe from './view/noticia/detalhe.js'
+Vue.component('p-noticia_detalhe', page_noticia_detalhe)
 
 import page_galeria from './view/galeria/home.js'
 Vue.component('p-galeria', page_galeria)
 
+import page_testemunho from './view/testemunho/home.js'
+Vue.component('p-testemunho', page_testemunho)
 
 import page_contato from './view/contato/home.js'
 Vue.component('p-contato', page_contato)
@@ -36,7 +40,13 @@ const routes = [
     { path: '/servicos', component: { template: '<p-servicos></p-servicos>' } },
     { path: '/sobre', component: { template: '<p-sobre></p-sobre>' } },
     { path: '/noticias', component: { template: '<p-noticia></p-noticia>' } },
+    { path: '/noticias', component: { template: '<p-noticia></p-noticia>' } },
+      {
+    path: '/noticias/detalhe/:id',  name:"detalhe",  
+    component: { template: "<p-noticia_detalhe></p-noticia_detalhe>" }, meta: { requiresAuth: true }
+  },
     { path: '/galeria', component: { template: '<p-galeria></p-galeria>' } },
+  { path: '/testemunho', component: { template: '<p-testemunho></p-testemunho>' } },
 
     { path: '/contato', component: { template: '<p-contato></p-contato>' } }
 ]

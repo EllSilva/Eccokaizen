@@ -1,7 +1,7 @@
 <div>
 
 
-    <!-- full Title -->
+    <!-- full Title.. -->
     <div class="full-title">
         <div class="container">
             <!-- Page Heading/Breadcrumbs -->
@@ -24,20 +24,20 @@
                 <div class="col-md-8 blog-entries">
                     <div class="row">
                         <!-- Blog Post -->
-                        <div class="col-md-6" v-for="post in ultimasPostagens"
-                    :key="post.id">
+                        <div class="col-md-6" v-for="post in postsFiltrados" :key="post.id">
                             <div class="card mb-4">
-                                <img class="card-img-top"  :src="caminho_img + post.imagem" alt="" style=" height: 250px; object-fit: cover;" alt="Card image Blog" />
+                                <img class="card-img-top" :src="caminho_img + post.imagem" alt=""
+                                    style=" height: 250px; object-fit: cover;" alt="Card image Blog" />
                                 <div class="card-body">
                                     <div class="by-post">
                                         Postado em {{ formatarData(post.createdAt) }} por <a href="#">ECCOKAIZEN</a>
                                     </div>
                                     <h2 class="card-title">{{ post.titulo }}</h2>
-                                    <p class="card-text">  {{ post.descricao }}</p>
-                                    <a href="#" class="btn btn-primary">Ler mais &rarr;</a>
+                                    <p class="card-text limite-linhas5"> {{ post.descricao }}</p>
+                                    <a @click="visualizar(post.id)" class="btn btn-primary">Ler mais &rarr;</a>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                     <div class="pagination_bar_arrow">
                         <!-- Pagination -->
@@ -58,10 +58,10 @@
                         <h5 class="card-header">Procurar</h5>
                         <div class="card-body">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Procurar por...">
+                                <input type="text" class="form-control" v-model="termoBusca"
+                                    placeholder="Procurar por...">
                                 <span class="input-group-btn">
-									<button class="btn btn-secondary" type="button">Ir!</button>
-								</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -69,36 +69,39 @@
                     <div class="card my-4">
                         <h5 class="card-header">Nota</h5>
                         <div class="card-body">
-                            Podes buscar por Data do blog ou Categoria!
+                            Podes buscar por Titulo ou SubTitulo!
                         </div>
                     </div>
                     <!-- Categories Widget -->
                     <div class="card my-4">
-                        <h5 class="card-header">Categoria</h5>
+                        <h5 class="card-header">PALAVRAS Chave</h5>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <a href="#">Contabilística</a>
+                                            <a href="#"
+                                                @click.prevent="selecionarPalavra('Contabilidade')">Contabilidade</a>
                                         </li>
                                         <li>
-                                            <a href="#">Fiscal</a>
+                                            <a href="#" @click.prevent="selecionarPalavra('fiscal')">Fiscal</a>
                                         </li>
                                         <li>
-                                            <a href="#">Jurídica</a>
+                                            <a href="#" @click.prevent="selecionarPalavra('gestão')">Gestão</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6">
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <a href="#">Financeira</a>
+                                            <a href="#" @click.prevent="selecionarPalavra('finanças')">finanças</a>
                                         </li>
                                         <li>
-                                            <a href="#">Jurídica</a>
+                                            <a href="#" @click.prevent="selecionarPalavra('Jurídica')">Jurídica</a>
                                         </li>
-
+                                        <li>
+                                            <a href="#" @click.prevent="selecionarPalavra('Impostos')">Impostos</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

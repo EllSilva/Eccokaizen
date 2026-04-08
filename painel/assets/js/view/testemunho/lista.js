@@ -42,7 +42,7 @@ export default {
       let dataForm = new FormData();
 
       let res = await fetch(
-        `http://localhost:3333/testemunhos/` + this.editIndex,
+        `https://api.ecco.ao/testemunhos/` + this.editIndex,
         {
           method: "DELETE",
           body: dataForm,
@@ -85,7 +85,7 @@ export default {
   async mounted() {
     let dados = (await this.listar()).data;
 
-    this.img = "http://localhost:3333/uploads/";
+    this.img = "https://api.ecco.ao/uploads/";
 
     this.produtos = (await this.listar()).data;
     // Formatar a data

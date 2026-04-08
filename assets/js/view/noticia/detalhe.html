@@ -1,0 +1,57 @@
+<div>
+
+
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3"> Detalhe da Noticias </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Detalhe Noticias</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-main">
+        <div class="container">
+            <div class="row">
+                <!-- Post Content Column -->
+                <div class="col-lg-8">
+                    <!-- Preview Image -->
+                    <img class="img-fluid rounded" :src="imagemPrincipal" alt="" />
+                    <hr>
+                    <!-- Date/Time -->
+                    <p>Publicado em {{ formatarData(createdAt) }}</p>
+                    <hr>
+                    <blockquote class="blockquote">
+
+                        <p class="mb-0"> {{ titulo }}</p>
+
+                    </blockquote>
+                    <!-- Post Content -->
+                    <p class="lead"> {{ subtitulo }} </p>
+
+                    <p> {{ descricao }}</p>
+
+                    <hr>
+
+
+                </div>
+
+
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </div>
+
+
+
+
+</div>

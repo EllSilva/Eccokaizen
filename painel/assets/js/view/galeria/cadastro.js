@@ -81,7 +81,7 @@ export default {
       dataForm.append("imagem", this.$refs.img.files[0]);
 
 
-      let res = await fetch(`http://localhost:3333/galeria`, {
+      let res = await fetch(`https://api.ecco.ao/galeria`, {
         method: "POST",
         body: dataForm,
       });
@@ -114,7 +114,7 @@ export default {
       let dataForm = new FormData();
 
       let res = await fetch(
-        `http://localhost:3333/galeria/` + this.editIndex,
+        `https://api.ecco.ao/galeria/` + this.editIndex,
         {
           method: "DELETE",
           body: dataForm,
@@ -157,7 +157,7 @@ export default {
 
   async mounted() {
 
-    this.imcaminho_img = "http://localhost:3333/carregar_img/";
+    this.imcaminho_img = "https://api.ecco.ao/carregar_img/";
     this.id = this.$route.params.id;
 
     this.listar()

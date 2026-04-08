@@ -53,7 +53,7 @@ export default {
       dataForm.append("autor", this.autor);
       dataForm.append("estado", this.estado);
 
-      let res = await fetch(`http://localhost:3333/testemunhos`, {
+      let res = await fetch(`https://api.ecco.ao/testemunhos`, {
         method: "POST",
         body: dataForm,
       });

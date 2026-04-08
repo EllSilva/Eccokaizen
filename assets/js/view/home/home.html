@@ -1,6 +1,6 @@
 <div>
-
-    <header class="slider-main">
+ 
+    <header class="slider-main"> 
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -261,22 +261,24 @@
                     <div class="post-slide">
                         <div class="post-header">
                             <h4 class="title">
-                                <a href="#">Última postagem do blog</a>
+                                <a @click="visualizar(post.id)" >Última postagem do blog</a>
                             </h4>
                             <ul class="post-bar">
-                                <li><img src="./assets/images/testi_01.png" alt=""><a href="#">ECCOKAIZEN</a></li>
+                                <li><img src="./assets/images/testi_01.png" alt=""><a @click="visualizar(post.id)" >ECCOKAIZEN</a></li>
                                 <li><i class="fa fa-calendar"></i>{{ formatarData(post.createdAt) }}</li>
                             </ul>
                         </div>
                         <div class="pic">
                             <img :src="caminho_img + post.imagem" alt="" style=" height: 220px; object-fit: cover;">
                             <ul class="post-category">
-                                <li><a href="#">{{ post.categoria }} </a></li>
+                                <li><a>{{ post.categoria }} </a></li>
                             </ul>
                         </div>
-                        <p class="post-description">
+                        <p class="post-description limite-linhas5">
                             {{ post.descricao }}
                         </p>
+
+                           <a @click="visualizar(post.id)"  class="">Ler mais &rarr;</a>
                     </div>
                 </div>
 
@@ -300,7 +302,7 @@
                 <div class="slider" :style="sliderStyle" @touchstart="touchStart" @touchend="touchEnd">
 
                     <div class="card2" v-for="(item, i) in slides" :key="i">
-                        <div class="testimonial">
+                        <div class="testimonial" @click="openModal(item)">
                             <p>{{ item.descricao }}</p>
 
                             <div class="user">
@@ -310,7 +312,7 @@
                                 </div>
                             </div>
 
-                            <img  :src="caminho_img + item.imagem"   alt="" srcset="" style=" height: 450px; object-fit: cover;">
+                            <img  :src="caminho_img + item.imagem"   alt="" srcset="" style=" height: 150px; object-fit: cover;">
 
                         </div>
                     </div>
@@ -325,9 +327,27 @@
                 <div class="pagination2">
                     <span v-for="(dot, i) in total" :key="i" class="dot" :class="{ active: i === currentIndex % total }"
                         @click="goTo(i)"></span>
-                </div>
+                </div> 
 
             </div>
+
+             <!-- MODAL -->
+  <div class="modal" v-if="modalOpen" @click.self="closeModal">
+    <div class="modal-content">
+      <span class="close" @click="closeModal">&times;</span>
+
+      <p>{{ selected.descricao }}</p>
+
+      <div class="user">
+        
+        <div>
+          <h4>{{ selected.autor }}</h4>
+          <span>FeedBack</span>
+          <img :src="caminho_img +selected.imagem" style="  object-fit: contain;">
+        </div>
+      </div>
+    </div>
+  </div>
 
         </div>
     </div>

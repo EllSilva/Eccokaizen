@@ -62,7 +62,7 @@ export default {
       dataForm.append("imagem", this.$refs.img.files[0]);
       dataForm.append("autor", this.autor);
 
-      let res = await fetch(`http://localhost:3333/noticias`, {
+      let res = await fetch(`https://api.ecco.ao/noticias`, {
         method: "POST",
         body: dataForm,
       });

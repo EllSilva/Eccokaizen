@@ -56,23 +56,7 @@ button.btn-secondary:hover {
     border-color: #323232;
 }
 
-.mouse-pointer {
-    background-color: #323232;
-    position: absolute;
-    color: white;
-    width: 25px;
-    height: 25px;
-    border: 3px solid #045998;
-    border-radius: 25px 50px 50px 50px/25px 50px 50px 50px;
-    z-index: 999999;
-    pointer-events: none;
-    -webkit-transition: all 0.1s;
-    -moz-transition: all 0.1s;
-    -o-transition: all 0.1s;
-    -ms-transition: all 0.1s;
-    transition: all 0.1s;
-}
-
+ 
 .top-bar {
     background: #045998;
     padding: 4px 0px;

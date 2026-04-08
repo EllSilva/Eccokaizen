@@ -103,6 +103,41 @@ body {
   background: #000;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-content img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 /* RESPONSIVO */
 @media(max-width: 900px){
   .card2 { min-width: calc(100% / 2); }
@@ -210,6 +245,24 @@ body {
 <!-- PAGINAÇÃO -->
 <div class="pagination2" id="pagination2"></div>
 
+
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="modal-text"></p>
+
+    <div class="user" id="modal-user">
+      <img id="modal-img">
+      <div>
+        <h4 id="modal-name"></h4>
+        <span id="modal-role"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 let index = 0;
 const slider = document.getElementById("slider");
@@ -273,6 +326,34 @@ window.addEventListener("resize", () => {
   createDots();
   updateSlider();
 });
+
+const modal = document.getElementById("modal");
+const modalText = document.getElementById("modal-text");
+const modalImg = document.getElementById("modal-img");
+const modalName = document.getElementById("modal-name");
+const modalRole = document.getElementById("modal-role");
+const closeBtn = document.querySelector(".close");
+
+// clicar no testemunho
+document.querySelectorAll(".testimonial").forEach(card => {
+  card.addEventListener("click", () => {
+    modal.style.display = "block";
+
+    modalText.textContent = card.querySelector("p").textContent;
+    modalImg.src = card.querySelector("img").src;
+    modalName.textContent = card.querySelector("h4").textContent;
+    modalRole.textContent = card.querySelector("span").textContent;
+  });
+});
+
+// fechar modal
+closeBtn.onclick = () => modal.style.display = "none";
+
+window.onclick = (e) => {
+  if(e.target === modal){
+    modal.style.display = "none";
+  }
+};
 
 createDots();
 updateSlider();
